@@ -1,12 +1,11 @@
 import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import useModal from "../hooks/useModal";
 import { Button } from "./button";
 
 const newItemSchema = Yup.object().shape({
     name: Yup.string().required().min(1, "Too short"),
-    purchaseDate: Yup.date().required(),
+    purchaseDate: Yup.date(),
     expirationDate: Yup.date(),
     useOrFreezeDate: Yup.date(),
     opened: Yup.boolean(),
@@ -67,7 +66,6 @@ const inventoryFormField = (params) => {
 }
 
 export const InventoryItemForm = (props) => {
-    const { isShowing, toggle } = useModal();
     const {
         _id,
         name: InventoryItemName,
@@ -83,10 +81,13 @@ export const InventoryItemForm = (props) => {
         const body = {
             inventoryItemId: _id,
             updateFields: {
-                ...values
+                ...values,
+                purchaseDate: new Date(values.purchaseDate),
+                expirationDate: new Date(values.expirationDate),
+                useOrFreezeDate: new Date(values.useOrFreezeDate),
             }
         }
-        const result = await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/inventory`, body);
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/inventory`, body);
         props.cb && props.cb()
         props.close && props.close()
     }
@@ -94,19 +95,22 @@ export const InventoryItemForm = (props) => {
     const onSubmitNew = async (values) => {
         const body = {
             createFields: {
-                ...values
+                ...values,
+                purchaseDate: new Date(values.purchaseDate),
+                expirationDate: new Date(values.expirationDate),
+                useOrFreezeDate: new Date(values.useOrFreezeDate),
             }
         }
-        const result = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/inventory`, body)
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/inventory`, body)
         props.cb && props.cb()
         props.close && props.close()
     }
 
     const initialFormValues = props.create === true ? {
         name: "",
-        purchaseDate: "",
-        expirationDate: "",
-        useOrFreezeDate: "",
+        purchaseDate: new Date(Date.now()).toISOString().slice(0, 10),
+        expirationDate: undefined,
+        useOrFreezeDate: undefined,
         opened: false,
         used: false,
         notes: ""
@@ -132,7 +136,7 @@ export const InventoryItemForm = (props) => {
         >
             <Form className="flex flex-col">
                 <section className="flex flex-col mb-4">
-                    { inventoryFormField({ fieldName: "name", label: "Item*" }) }
+                    { inventoryFormField({ fieldName: "name", label: "Item" }) }
                     { inventoryFormField({ fieldName: "purchaseDate", label: "Purchase Date", type: "date" }) }
                     { inventoryFormField({ fieldName: "expirationDate", label: "Expiration Date", type: "date" }) }
                     { inventoryFormField({ fieldName: "useOrFreezeDate", label: "Use or Freeze Date", type: "date" }) }
