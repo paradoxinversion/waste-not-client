@@ -6,7 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project uses `.env` files for environment variables. The following fields should be included.
 
-REACT_APP_API_URL
+### `REACT_APP_API_URL`
+
 The URL of the Waste Not API. For local development this is usually `http://localhost:3030`
 
 ## Available Scripts
