@@ -22,15 +22,18 @@ function App() {
   }
 
   return (
-    <div className="bg-blue-900 text-white">
+    <div className="flex flex-col bg-snow h-screen">
       <header>
-        <p className='text-3xl p-2 font-bold'>Waste Not</p>
+        <p className='bg-darkOrange text-snow text-3xl p-2 font-bold'>Waste Not</p>
       </header>
-      <div className="bg-blue-400 min-h-screen p-2">
+      <div className="max-h-max p-2">
         {/* <NavigationBar onTabSelect={onTabSelect}/> */}
         {currentTab === "authentication" && <Auth />}
         {currentTab === "inventory" && <Inventory  inventory={inventoryItems} getInventory={getInventory} />}
       </div>
+      <footer className="self-end bg-eerieBlack h-16">
+
+      </footer>
     </div>
   );
 }
