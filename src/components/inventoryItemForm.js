@@ -49,7 +49,7 @@ const inventoryFormField = (params) => {
         return (
             <div className={`${containerClass || "mb-4 flex flex-col"}`}>
                 <div className="flex justify-between">
-                    <label htmlFor={fieldName}>{label}</label>
+                    <label className="text-sm text-slate-600" htmlFor={fieldName}>{label}</label>
                     <Field id={fieldName} name={fieldName} type="checkbox" className={`${fieldClass || "input"}`} />
                 </div>
                 <ErrorMessage name={fieldName} />
@@ -58,7 +58,7 @@ const inventoryFormField = (params) => {
     }
     return (
         <div className={`${containerClass || "mb-4 flex flex-col"}`}>
-            <label htmlFor={fieldName}>{label}</label>
+            <label className="text-sm text-slate-600" htmlFor={fieldName}>{label}</label>
             <Field id={fieldName} name={fieldName} type={type || "text"} className={`${fieldClass || "input"}`} as={fieldAs || undefined} />
             <ErrorMessage name={fieldName} />
         </div>

@@ -22,9 +22,9 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col bg-snow h-screen">
+    <div className="flex flex-col bg-gray-300 h-screen">
       <header>
-        <p className='bg-darkOrange text-snow text-3xl p-2 font-bold'>Waste Not</p>
+        <p className='text-3xl p-2 font-bold'>Waste Not</p>
       </header>
       <div className="max-h-max p-2">
         {/* <NavigationBar onTabSelect={onTabSelect}/> */}

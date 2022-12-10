@@ -4,10 +4,9 @@
 
 @layer components {
   .input {
-    @apply border rounded p-1;
+    @apply border-b border-b-slate-400 p-1;
   }
-
   .btn {
-    @apply border rounded px-4 py-1;
+    @apply border-b border-b-black px-4 py-1;
   }
 }
